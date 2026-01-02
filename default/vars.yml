@@ -1,0 +1,20 @@
+workday_default_splunk_index:
+  type: string
+  lib: custom
+  value: "'workday'"
+workday_domain:
+  type: string
+  lib: custom
+  value: "'placeholder'"
+workday_customer_dir:
+  type: string
+  lib: custom
+  value: "'placeholder'"
+workday_client_id:
+  type: string
+  lib: custom
+  value: "'placeholder'"
+workday_refresh_token:
+  type: string
+  lib: custom
+  value: "'placeholder'"
