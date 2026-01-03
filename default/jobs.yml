@@ -132,12 +132,17 @@ workday-activity-logging-secret_variable:
       jobTimeout: 300s
       mode: run
       timeRangeType: relative
-      timestampTimezone: UTC
       timeWarning: {}
       expression: "true"
       minTaskSize: 1MB
       maxTaskSize: 10MB
-      stateTracking: {}
+      stateTracking:
+        stateUpdateExpression: "__timestampExtracted !== false && {latestTime:
+          (state.latestTime || 0) > _time ? state.latestTime : _time}"
+        stateMergeExpression: "(prevState.latestTime || 0) > newState.latestTime ?
+          prevState : newState"
+        enabled: true
+      timestampTimezone: UTC
       earliest: -6m@m
       latest: -1m@m
     enabled: false
