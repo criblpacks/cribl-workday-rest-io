@@ -216,8 +216,8 @@ workday-activity-logging-secret_variable:
           value: "`refresh_token`"
         - name: client_secret
           value: "`${C.vars['workday_client_secret']}`"
-      username: changeme
-      password: changeme
+      username: SET_VARIABLE_INSTEAD
+      password: SET_VARIABLE_INSTEAD
     destructive: false
     type: rest
   input:
