@@ -10,7 +10,7 @@ routes:
     description: Workday Activity Logging
     enableOutputExpression: false
     outputExpression: null
-    filter: __inputId.includes('workday-activity-logging')
+    filter: __packsource == 'cribl-workday-io.activity'
     clones: []
     output: default
   - id: default

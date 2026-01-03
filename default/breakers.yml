@@ -1,4 +1,4 @@
-Workday-API:
+Workday API Ruleset:
   lib: custom
   minRawLength: 256
   rules:
