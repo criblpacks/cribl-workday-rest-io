@@ -1,0 +1,29 @@
+workday_domain:
+  type: string
+  lib: custom
+  value: "'YOUR_WORKDAY_DOMAIN'"
+  description: "REQUIRED: Your Workday domain (the subdomain used to access your Workday instance)"
+workday_customer_dir:
+  type: string
+  lib: custom
+  value: "'YOUR_WORKDAY_CUSTOMER_DIR'"
+  description: "REQUIRED: Location of your services"
+workday_client_id:
+  type: string
+  lib: custom
+  value: "'YOUR_WORKDAY_CLIENT_ID'"
+  description: "REQUIRED: Your Workday Client ID"
+workday_client_secret:
+  type: encryptedString
+  lib: custom
+  value: "'YOUR_WORKDAY_CLIENT_SECRET'"
+  description: "REQUIRED: Your Workday Client Secret"
+workday_refresh_token:
+  type: encryptedString
+  lib: custom
+  value: "'YOUR_WORKDAY_REFRESH_TOKEN'"
+  description: "REQUIRED: Your Workday Refresh Token"
+workday_default_splunk_index:
+  type: string
+  lib: custom
+  value: "'workday'"

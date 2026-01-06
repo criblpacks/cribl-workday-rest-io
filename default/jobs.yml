@@ -1,0 +1,116 @@
+workday-activity-logging:
+  type: collection
+  ttl: 4h
+  ignoreGroupJobsLimit: false
+  removeFields: []
+  resumeOnBoot: false
+  schedule:
+    cronSchedule: "*/5 * * * *"
+    maxConcurrentRuns: 3
+    skippable: false
+    resumeMissed: true
+    run:
+      rescheduleDroppedTasks: true
+      maxTaskReschedule: 1
+      logLevel: info
+      jobTimeout: 300s
+      mode: run
+      timeRangeType: relative
+      timestampTimezone: UTC
+      timeWarning: {}
+      expression: "true"
+      minTaskSize: 1MB
+      maxTaskSize: 10MB
+      stateTracking: {}
+      earliest: -6m@m
+      latest: -1m@m
+    enabled: false
+  streamtags: []
+  workerAffinity: false
+  collector:
+    conf:
+      discovery:
+        discoverType: none
+        discoverMethod: get
+      collectMethod: get
+      pagination:
+        type: request_offset
+        offsetField: offset
+        limitField: limit
+        limit: 100
+        maxPages: 0
+        zeroIndexed: true
+        totalRecordField: total
+      authentication: oauth
+      timeout: 0
+      useRoundRobinDns: false
+      disableTimeFilter: false
+      decodeUrl: true
+      rejectUnauthorized: false
+      captureHeaders: false
+      stopOnEmptyResults: false
+      safeHeaders: []
+      retryRules:
+        type: backoff
+        interval: 1000
+        limit: 5
+        multiplier: 2
+        maxIntervalMs: 20000
+        codes:
+          - 429
+          - 503
+        enableHeader: true
+        retryConnectTimeout: false
+        retryConnectReset: false
+        retryHeaderName: retry-after
+      __scheduling:
+        stateTracking: {}
+      loginUrl: "`https://${C.vars['workday_domain']}.myworkday.com/ccx/oauth2/${C.va\
+        rs['workday_customer_dir']}/token`"
+      authHeaderKey: Authorization
+      authHeaderExpr: "`Bearer ${token}`"
+      clientSecretParamName: client_secret
+      tokenRespAttribute: access_token
+      collectUrl: "`https://${C.vars['workday_domain']}.myworkday.com/ccx/api/privacy\
+        /v1/${C.vars['workday_customer_dir']}/activityLogging`"
+      collectRequestParams:
+        - name: from
+          value: "`${earliest ? new Date(earliest * 1000).toISOString() : new
+            Date(Date.now() - (3600000)).toISOString()}`"
+        - name: to
+          value: "`${latest ? new Date(latest * 1000).toISOString() : new
+            Date(Date.now()).toISOString()}`"
+      collectRequestHeaders: []
+      clientSecretParamValue: YOUR_CLIENT_SECRET
+      authRequestParams:
+        - name: client_id
+          value: "`${C.vars['workday_client_id']}`"
+        - name: refresh_token
+          value: "`${C.vars['workday_refresh_token']}`"
+        - name: grant_type
+          value: "`refresh_token`"
+    destructive: false
+    type: rest
+  input:
+    type: collection
+    staleChannelFlushMs: 10000
+    sendToRoutes: true
+    preprocess:
+      disabled: true
+    throttleRatePerSec: "0"
+    breakerRulesets:
+      - Workday API Ruleset
+    metadata:
+      - name: index
+        value: '"workday"'
+      - name: sourcetype
+        value: '"workday:user_activity"'
+      - name: source
+        value: __collectStats.url
+      - name: __collector_name
+        value: '"workday"'
+      - name: __packsource
+        value: "'cribl-workday-io.activity'"
+  savedState: {}
+  notifications: []
+  description: Workday Activity Logs

@@ -1,0 +1,26 @@
+id: default
+groups: {}
+comments: []
+routes:
+  - id: 3JS1kc
+    name: Workday Activity Logging
+    final: true
+    disabled: false
+    pipeline: cribl-workday
+    description: Workday Activity Logging
+    enableOutputExpression: false
+    outputExpression: null
+    filter: __packsource == 'cribl-workday-io.activity'
+    clones: []
+    output: default
+  - id: default
+    name: default
+    final: true
+    disabled: false
+    pipeline: main
+    description: ""
+    enableOutputExpression: false
+    outputExpression: null
+    filter: "true"
+    clones: []
+    output: default
