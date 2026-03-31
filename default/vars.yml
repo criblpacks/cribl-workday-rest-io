@@ -16,12 +16,12 @@ workday_client_id:
 workday_client_secret:
   type: encryptedString
   lib: custom
-  value: "'YOUR_WORKDAY_CLIENT_SECRET'"
-  description: "REQUIRED: Your Workday Client Secret"
+  value: "YOUR_WORKDAY_CLIENT_SECRET"
+  description: "Your Workday Client Secret (if asked)"
 workday_refresh_token:
   type: encryptedString
   lib: custom
-  value: "'YOUR_WORKDAY_REFRESH_TOKEN'"
+  value: "YOUR_WORKDAY_REFRESH_TOKEN"
   description: "REQUIRED: Your Workday Refresh Token"
 workday_default_splunk_index:
   type: string
